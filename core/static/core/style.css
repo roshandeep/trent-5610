@@ -1,0 +1,74 @@
+html, body {
+}
+
+.navbar{
+    margin-bottom: 20px;
+}
+
+.card{
+    height: 600px;
+}
+
+.card-body{
+    background-image: url("/static/core/img/chatbot-background.jpg");
+    margin: 0;
+    padding: 0 10px 10px;
+    min-height:200px;
+    max-height:500px;
+    overflow-x:hidden;
+}
+
+.card-header{
+    background: #243136;
+    color: #fff;
+}
+
+.chat-bubble {
+    font-size: 15px;
+    padding: 20px 25px;
+    box-shadow: none;
+    display: inline-block;
+    clear: both;
+    margin: 10px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.02);
+}
+
+.chat-bubble.you {
+	background: #d6eeff;
+	color: #285b9c;
+	border-radius: 0 15px 15px 15px;
+	align-self: flex-start;
+	display: flex;
+	width: fit-content;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.02);
+}
+
+.chat-bubble.me {
+	background: #e94746;
+	color: #ffe2e2;
+	border-radius: 15px 0px 15px 15px;
+	float: right;
+	align-self: flex-end;
+	display: flex;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.02);
+}
+
+.chat-img{
+  display: inline-block;
+  width: 5%;
+  min-width: fit-content;
+}
+
+.chat-msg{
+  display: inline-block;
+  padding: 0 0 0 10px;
+  vertical-align: top;
+  width: 95%
+}
+
+.chat-msg p {
+  margin: 0;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
+}
+

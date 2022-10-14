@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'core/style.css' %}">
+    <script src="{% static 'core/main.js' %}"></script>
+    <title>Canatrace ChatBot</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="https://canatrace.com/">
+            <img src="{% static 'core/img/canatrace-logo.png'%}" alt="Canatrace" width="275" height="65">
+        </a>
+    </div>
+    <div>
+        <select name="language-picker-select" id="language-picker-select" class="form-control form-select" style="width:auto;">
+            <option lang="en" value="EN" selected="selected">English</option>
+            <option lang="fr" value="FR">Français</option>
+        </select>
+    </div>
+</nav>
+<div class="container" style="min-height: 100%;">
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <div class="card" id="chat-screen">
+
+                <div class="card-header">
+                    <div class="col-md-12 col-xs-12">
+                        <h3 class="panel-title text-center"> Canatrace Chat Assistance</h3>
+                    </div>
+                </div>
+
+
+                <div class="card-body" id="chatbot-body">
+                    <div class="chat-bubble you">
+                        <div class="chat-img">
+                            <img src="{% static 'core/img/tracy.PNG' %}" alt="tracy"
+                                 style="width:50px; border-radius: 50%;">
+                        </div>
+                        <div class="chat-msg">
+                            <p id="intro-msg">{{ intro_en }}</p>
+                        </div>
+                    </div>
+                    <div class="chat-bubble you chat-animation-div">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                             style="margin: auto;display: block;shape-rendering: auto;width: 43px;height: 20px;"
+                             viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="chat-animation">
+                            <circle cx="0" cy="44.1678" r="15" fill="#ffffff">
+                                <animate attributeName="cy" calcMode="spline"
+                                         keySplines="0 0.5 0.5 1;0.5 0 1 0.5;0.5 0.5 0.5 0.5" repeatCount="indefinite"
+                                         values="57.5;42.5;57.5;57.5" keyTimes="0;0.3;0.6;1" dur="1s"
+                                         begin="-0.6s"></animate>
+                            </circle>
+                            <circle cx="45" cy="43.0965" r="15" fill="#ffffff">
+                                <animate attributeName="cy" calcMode="spline"
+                                         keySplines="0 0.5 0.5 1;0.5 0 1 0.5;0.5 0.5 0.5 0.5" repeatCount="indefinite"
+                                         values="57.5;42.5;57.5;57.5" keyTimes="0;0.3;0.6;1" dur="1s"
+                                         begin="-0.39999999999999997s"></animate>
+                            </circle>
+                            <circle cx="90" cy="52.0442" r="15" fill="#ffffff">
+                                <animate attributeName="cy" calcMode="spline"
+                                         keySplines="0 0.5 0.5 1;0.5 0 1 0.5;0.5 0.5 0.5 0.5" repeatCount="indefinite"
+                                         values="57.5;42.5;57.5;57.5" keyTimes="0;0.3;0.6;1" dur="1s"
+                                         begin="-0.19999999999999998s"></animate>
+                            </circle>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="input-group">
+                        <input id="chat-input-text_id" name="chatbotInput" class="form-control input-sm"
+                               placeholder="Type your message..."/>
+                        <div class="input-group-append">
+                            <button type="submit" id="send_btn" class="btn btn-primary btn-sm" value="Send"
+                                    style="background: #243136; border: none;">
+                                <a class="send_btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="feather feather-send">
+                                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                    </svg>
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var selected_language_ctrl = document.getElementById("language-picker-select");
+    var lang=''
+    function show(){
+      lang = selected_language_ctrl.options[selected_language_ctrl.selectedIndex].value;
+      var intro_msg = document.getElementById("intro-msg");
+      if (lang == "EN") {
+        intro_msg.innerHTML = "{{ intro_en }}";
+        }
+        else if (lang == "FR") {
+            intro_msg.innerHTML = "{{ intro_fr }}";
+        }
+    }
+    selected_language_ctrl.onchange=show;
+    show();
+</script>
+</body>
+</html>
