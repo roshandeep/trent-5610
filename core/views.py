@@ -64,7 +64,7 @@ def chatbot_query(chatbotInput, request, language):
         DEFAULT_FALLBACK_MSG = var_obj.default_fallback_msg_fr
 
     MISCLASSIFY_THRESHOLD = var_obj.misclassify_threshold
-    #print(MISCLASSIFY_THRESHOLD, APOLOGY_MSG, MISCLASSIFY_THRESHOLD)
+    # print(MISCLASSIFY_THRESHOLD, APOLOGY_MSG, MISCLASSIFY_THRESHOLD)
 
     fallback = APOLOGY_MSG
     result = ''

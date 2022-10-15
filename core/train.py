@@ -14,30 +14,32 @@ from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 
+
 # function to load the training dataset
 def load_dataset(filename):
-  df = pd.read_excel(filename, sheet_name='final', names = ["Questions", "Intent", "Answer"])
-  # print(df.head())
-  intent = df["Intent"]
-  unique_intent = list(set(intent))
-  Questions = df["Questions"]
-  #Questions = list(df["Questions"])
-  return (intent, unique_intent, Questions)
+    df = pd.read_excel(filename, sheet_name='final', names=["Questions", "Intent", "Answer"])
+    # print(df.head())
+    intent = df["Intent"]
+    unique_intent = list(set(intent))
+    Questions = df["Questions"]
+    # Questions = list(df["Questions"])
+    return (intent, unique_intent, Questions)
+
 
 # function to preprocess the data
 def preprocess_dataset(sentence):
-        # Remove punctuations
+    # Remove punctuations
     c = sentence.str.translate(str.maketrans(' ', ' ', string.punctuation))
-        # Remove Digits
+    # Remove Digits
     c = c.str.translate(str.maketrans(' ', ' ', '\n'))
     c = c.str.translate(str.maketrans(' ', ' ', digits))
-        # Split combined words
-    c = c.apply(lambda tweet: re.sub(r'([a-z])([A-Z])',r'\1 \2', tweet))
-        # Convert to lowercase
+    # Split combined words
+    c = c.apply(lambda tweet: re.sub(r'([a-z])([A-Z])', r'\1 \2', tweet))
+    # Convert to lowercase
     c = c.str.lower()
-        # Split/ tokenize - Split each sentence using delimiter
+    # Split/ tokenize - Split each sentence using delimiter
     c = c.str.split()
-        # Lemmatize - Convert Word to Base Form
+    # Lemmatize - Convert Word to Base Form
     from tqdm import tqdm
     lemmatizer = WordNetLemmatizer()
     com = []
@@ -45,7 +47,7 @@ def preprocess_dataset(sentence):
         new = []
         for x in y:
             z = lemmatizer.lemmatize(x)
-            z = lemmatizer.lemmatize(z,'v')
+            z = lemmatizer.lemmatize(z, 'v')
             new.append(z)
         y = new
         com.append(y)
@@ -65,26 +67,25 @@ def trainbot():
     intents = []
     for i in range(len(df2)):
         for j in range(len(df1)):
-            if(df2.loc[i, "intents_id"] == df1.loc[j, "id"]):
+            if (df2.loc[i, "intents_id"] == df1.loc[j, "id"]):
                 intents.append(df1.loc[j, "intent"])
     df2['intents'] = pd.DataFrame(intents)
 
     Questions = df2['question']
     intent = df2['intents']
 
-
     # preprocess the data
     clean_words = preprocess_dataset(Questions)
 
     # Data obtained after Lemmatization is in array form, and is converted to Dataframe in the next step.
-    clean_data = pd.DataFrame(np.array(clean_words), index = Questions.index, columns = {'text'})
+    clean_data = pd.DataFrame(np.array(clean_words), index=Questions.index, columns={'text'})
     clean_data['text'] = clean_data['text'].str.join(" ")
 
     # clean data for training
     data = clean_data['text']
 
     # Initialize a CountVectorizer object: count_vectorizer
-    count_vec = TfidfVectorizer(analyzer = 'word', ngram_range = (1, 1), max_df = 1.0, min_df = 1, max_features = None)
+    count_vec = TfidfVectorizer(analyzer='word', ngram_range=(1, 1), max_df=1.0, min_df=1, max_features=None)
 
     # Transforms the data into a bag of words
     count_train = count_vec.fit(data)
@@ -93,7 +94,7 @@ def trainbot():
     count_vec.vocabulary_;
 
     # Train the model
-    model = MultinomialNB(alpha = 0.001)
+    model = MultinomialNB(alpha=0.001)
     model.fit(bag_of_words.todense(), intent.values.ravel());
 
     # Saving the model and intent data to pickle file
@@ -106,5 +107,5 @@ def trainbot():
     if os.path.isfile(modelfile):
         os.remove(modelfile)
 
-    pickle.dump( pickl, open( 'models' + ".p", "wb" ) )
+    pickle.dump(pickl, open('models' + ".p", "wb"))
     # intent_answers.to_pickle("./intent_answers.pkl")
