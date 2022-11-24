@@ -56,11 +56,12 @@ def classify_question(question, language):
     question = fix_spellings(question)
 
     # If the language is French, translate to English
-    if language == 'FR':
-        translator = google_translator()
-        translate_text = translator.translate(question, lang_tgt='en')
-    else:
-        translate_text = question
+    translate_text = question
+    # if language == 'FR':
+    #     translator = google_translator()
+    #     translate_text = translator.translate(question, lang_tgt='en')
+    # else:
+    #     translate_text = question
 
     # loading the model from disk
     with open(BASE_DIR_REF + '/models.p', 'rb') as pickled:
