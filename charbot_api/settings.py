@@ -29,7 +29,7 @@ SECRET_KEY = 'e080+@wnij7offk-thssiorf1__xule^9+-#$^lgw6y6%15v(m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.98.34.143', 'localhost', '127.0.0.1', 'chatbot.canatrace.com']
+ALLOWED_HOSTS = ['3.129.140.74', 'localhost', '127.0.0.1']
 
 
 # Application definition
