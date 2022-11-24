@@ -85,10 +85,10 @@ def classify_question(question, language):
 
     for i in range(len(intent_answers)):
         if result == intent_answers.loc[i, "intent"]:
-            if language == 'EN':
-                Answer = intent_answers.loc[i, "EN_Answer"]
-            else:
-                Answer = intent_answers.loc[i, "FR_Answer"]
+            # if language == 'EN':
+            Answer = intent_answers.loc[i, "EN_Answer"]
+            # else:
+            #     Answer = intent_answers.loc[i, "FR_Answer"]
             # print(Answer)
 
     class_probabilities = model.predict_proba(test)

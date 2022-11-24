@@ -56,12 +56,12 @@ def canatracechatbot(request):
 
 def chatbot_query(chatbotInput, request, language):
     var_obj = Variables.objects.first()
-    if language == 'EN':
-        APOLOGY_MSG = var_obj.apology_msg_en
-        DEFAULT_FALLBACK_MSG = var_obj.default_fallback_msg_en
-    elif language == 'FR':
-        APOLOGY_MSG = var_obj.apology_msg_fr
-        DEFAULT_FALLBACK_MSG = var_obj.default_fallback_msg_fr
+    # if language == 'EN':
+    APOLOGY_MSG = var_obj.apology_msg_en
+    DEFAULT_FALLBACK_MSG = var_obj.default_fallback_msg_en
+    # elif language == 'FR':
+    #     APOLOGY_MSG = var_obj.apology_msg_fr
+    #     DEFAULT_FALLBACK_MSG = var_obj.default_fallback_msg_fr
 
     MISCLASSIFY_THRESHOLD = var_obj.misclassify_threshold
     # print(MISCLASSIFY_THRESHOLD, APOLOGY_MSG, MISCLASSIFY_THRESHOLD)
